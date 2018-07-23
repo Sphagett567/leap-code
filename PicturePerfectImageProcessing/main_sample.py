@@ -5,8 +5,8 @@ def denoise_image(pixels, height, width, n):
         temprow = []
         for pic_col in range(0, width):
             red_mean = 0
-            blue_mean = 0
-            green_mean = 0
+	# Need variables for blue and green mean values!
+
             for win_row in range(0, n):
                 for win_col in range(0, n):
                     top_valid = pic_row + win_row - n/2
@@ -15,11 +15,9 @@ def denoise_image(pixels, height, width, n):
                         discard = discard + 1
                     else:
                         red_mean += pixels[top_valid][side_valid].getRed()
-                        blue_mean += pixels[top_valid][side_valid].getBlue()
-                        green_mean += pixels[top_valid][side_valid].getGreen()
+			# Need to calculate the green and blue values!
             temprow.append(red_mean / ((n*n) - discard))
-            temprow.append(green_mean / ((n*n) - discard))
-            temprow.append(blue_mean / ((n*n) - discard))
+	    # Need to add the blue and green values to the row too!
             discard = 0
         new_image.append(temprow)
     return new_image
