@@ -6,8 +6,20 @@ import java.util.Random;
 public class SampleBot
 {
     private int gameSize;
+
     private BattleShip battleShip;
+
     private Random random;
+
+    // Used to track where you've already shot
+    // Suggested:
+    //      0 = No shot
+    //      1 = Shot - miss
+    //      2 = Shot - hit
+    private int[][] enemyBoard;
+
+    // Keeping track of whether the last shot was a hit or miss
+    private boolean lastShotHit;
 
     /**
      * Constructor keeps a copy of the BattleShip instance
@@ -17,7 +29,8 @@ public class SampleBot
     {
         battleShip = b;
         gameSize = b.BOARDSIZE;
-        random = new Random();   // Needed for random shooter - not required for more systematic approaches
+        random = new Random();
+        enemyBoard = new int[gameSize][gameSize];
     }
 
     /**
@@ -30,8 +43,18 @@ public class SampleBot
         int x = random.nextInt(gameSize);
         int y = random.nextInt(gameSize);
         Point shot = new Point(x,y);
-        boolean hit = battleShip.shoot(shot);
+        lastShotHit = battleShip.shoot(shot);
 
-        return hit;
+        return lastShotHit;
+    }
+
+    public boolean isValidShot(int x, int y) {
+        return (x >= 0 && x < 10 && y >= 0 && y < 10);
+    }
+
+    public boolean alreadyBeenShot(int x, int y) {
+        if (isValidShot(x, y))
+            return enemyBoard[x][y] == 1 || enemyBoard[x][y] == 2;
+        return false;
     }
 }
