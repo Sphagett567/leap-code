@@ -31,6 +31,10 @@ public class SampleBot
         gameSize = b.BOARDSIZE;
         random = new Random();
         enemyBoard = new int[gameSize][gameSize];
+
+        for (int i = 0; i < gameSize; i++)
+            for (int j = 0; j < gameSize; j++)
+                enemyBoard[i][j] = 0;
     }
 
     /**
@@ -42,8 +46,19 @@ public class SampleBot
     {
         int x = random.nextInt(gameSize);
         int y = random.nextInt(gameSize);
-        Point shot = new Point(x,y);
-        lastShotHit = battleShip.shoot(shot);
+
+        while (alreadyBeenShot(x, y)) {
+            x = random.nextInt(gameSize);
+            y = random.nextInt(gameSize);
+        }
+
+        lastShotHit = battleShip.shoot(new Point(x, y));
+
+        if (lastShotHit) {
+            enemyBoard[x][y] = 2;
+        } else {
+            enemyBoard[x][y] = 1;
+        }
 
         return lastShotHit;
     }
