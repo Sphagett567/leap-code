@@ -1,17 +1,16 @@
 String data; 
 
-const int RED = 13;
-const int YELLOW = 12;
-const int GREEN = 11;
+const int A = 13;
+const int B = 12;
+
 
 String readString;
 
 void setup() {
   Serial.begin(9600);
   
-  pinMode(RED, OUTPUT); 
-  pinMode(YELLOW, OUTPUT); 
-  pinMode(GREEN, OUTPUT); 
+  pinMode(A, OUTPUT); 
+  pinMode(B, OUTPUT); 
 }
 
 void loop() {
@@ -44,12 +43,10 @@ void parseData(String data) {
   
   if (data == "clear") {
     clearPins();
-  } else if (data == "red_on") {
-    digitalWrite(RED, HIGH);
-  } else if (data == "yellow_on") {
-    digitalWrite(YELLOW, HIGH);
-  } else if (data == "green_on") {
-    digitalWrite(GREEN, HIGH);
+  } else if (data == "a_on") {
+    digitalWrite(A, HIGH);
+  } else if (data == "b_on") {
+    digitalWrite(B, HIGH);
   } else {
     Serial.print("Unable to parse command: ");
     Serial.print(data);
@@ -58,8 +55,7 @@ void parseData(String data) {
 }
 
 void clearPins() {
-    digitalWrite(RED, LOW);
-    digitalWrite(YELLOW, LOW);
-    digitalWrite(GREEN, LOW);
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
 }
 
