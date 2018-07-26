@@ -1,7 +1,8 @@
-#!/bin/bash
 
-cd AIY-voice-kit-python
+#!/bin/bash
+
+cd AIY-projects-python
 cd src
 cd examples
 cd voice
-python3 assistant_library_with_button_demo.py
+python3 assistant_library_demo.py
