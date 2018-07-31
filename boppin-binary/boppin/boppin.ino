@@ -4,6 +4,11 @@ int two = 12;
 int four = 11;
 int eight = 10;
 
+int sixteen = 9;
+int thrirty_two = 8;
+int sixty_four = 7;
+int hundred = 6;
+
 // Setup pins as output
 void setup() 
 {
@@ -11,6 +16,10 @@ void setup()
   pinMode(two, OUTPUT);
   pinMode(four, OUTPUT);
   pinMode(eight, OUTPUT);
+  pinMode(sixteen, OUTPUT);
+  pinMode(thrirty_two, OUTPUT);
+  pinMode(sixty_four, OUTPUT);
+  pinMode(hundred, OUTPUT);
 }
 
 // Loops continuosly
@@ -18,7 +27,11 @@ void setup()
 // Modify to count from 0 .. 255 (8 bits)
 void loop() 
 {
-  lightNumber(15);
+  for (int i = 0; i <= 255; i++) {
+    lightNumber(i);
+    delay(100);
+  }
+  delay(1000);
 }
 
 // Current is the current highest power of 2
@@ -26,7 +39,7 @@ void lightNumber(int n)
 {
   blank();
 
-  int current = 8;
+  int current = 128;
   
   while (n > 0)
   {
@@ -46,7 +59,15 @@ void lightNumber(int n)
 // Only works for 0 .. 15 (4 bits)
 void turnOn(int n)
 {
- if (n >= 8)
+  if (n >= 128) {
+    digitalWrite(hundred, HIGH);
+  } else if (n >= 64) {
+    digitalWrite(sixty_four, HIGH);
+  } else if (n >= 32) {
+    digitalWrite(thirty_two, HIGH);
+  } else if (n >= 16) {
+    digitalWrite(sixteen, HIGH);
+  }else if (n >= 8)
   {
     digitalWrite(eight, HIGH);
   }
@@ -67,12 +88,16 @@ void turnOn(int n)
 // Blank all LEDs
 void blank()
 {
-  // You need to fill this in
+  for (int i = 13; i >= 6; i--) {
+    digitalWrite(i, LOW);
+  }
 }
 
 // Light up all LEDs
 void lightAll()
 {
-  // You need to fill this in
+   for (int i = 13; i >= 6; i--) {
+    digitalWrite(i, HIGH);
+  }
 }
 
